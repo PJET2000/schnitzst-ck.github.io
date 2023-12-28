@@ -1,21 +1,34 @@
-<form name="contact" method="POST" data-netlify="true">
+---
+// import contact from "../components/Contact"
+---
+
+<form name="feedback" method="POST" data-netlify="true">
+    <h3>We Love Hearing From You!</h3>
     <p>
-      <label>Your Name: <input type="text" name="name" /></label>
+      <label>Dein Name: <input type="text" name="name" placeholder="Dein Name" /></label>
     </p>
     <p>
-      <label>Your Email: <input type="email" name="email" /></label>
+      <label>Deine E-Mail: <input type="email" name="email" placeholder="deine@email.com" /></label>
     </p>
     <p>
-      <label>Your Role: <select name="role[]" multiple>
-        <option value="leader">Leader</option>
-        <option value="follower">Follower</option>
+      <label>Deine Rolle bei SchnitzStück: <select name="role[]" multiple>
+        <option value="enthusiast">Enthusiast</option>
+        <option value="critic">Kritiker</option>
+        <option value="partner">Partner</option>
+        <option value="other">Anderes</option>
       </select></label>
     </p>
     <p>
-      <label>Message: <textarea name="message"></textarea></label>
+      <label>Dein Feedback oder Vorschlag: <textarea name="message" placeholder="Teile deine Gedanken und Ideen mit uns!"></textarea></label>
     </p>
     <p>
-      <button type="submit">Send</button>
+      <button type="submit">Absenden</button>
     </p>
-  </form>
+</form>
+
   
+
+   <!-- <main>
+    <contact/>
+</main> -->
+
