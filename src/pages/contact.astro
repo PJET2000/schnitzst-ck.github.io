@@ -1,9 +1,10 @@
 ---
-// import contact from "../components/Contact"
+import MainLayout from "../layouts/main-layout.astro"
+import Kontakt from "../components/cont"
 ---
-
+<!-- 
 <form name="feedback" method="POST" data-netlify="true">
-    <h3>We Love Hearing From You!</h3>
+    <h3>Wir freuen uns von Dir zu hören!</h3>
     <p>
       <label>Dein Name: <input type="text" name="name" placeholder="Dein Name" /></label>
     </p>
@@ -24,11 +25,12 @@
     <p>
       <button type="submit">Absenden</button>
     </p>
-</form>
+</form> -->
 
   
 
-   <!-- <main>
-    <contact/>
-</main> -->
+<MainLayout title="Kontakt">
+    <Kontakt client:load/>
+</MainLayout>
+
 
