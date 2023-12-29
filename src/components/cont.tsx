@@ -31,47 +31,41 @@ const FeedbackForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-4" name="feedback-form" method="POST" data-netlify="true">
-      <h2 className="text-xl font-semibold mb-4">Feedback für SchnitzStück</h2>
-      <div className="mb-4">
-        <p className="mb-2">Was halten Sie bisher von SchnitzStück?</p>
-        <div className="flex gap-2">
-          {['Mega!', 'Ganz ok', 'Das wird nix...'].map((level) => (
-            <button
-              key={level}
-              type="button"
-              onClick={() => handleSatisfactionClick(level)}
-              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              {level}
-            </button>
-          ))}
+    <div className="p-4 max-w-lg mx-auto bg-gray-800 text-white">
+      <form onSubmit={handleSubmit} name="feedback-form" method="POST" data-netlify="true" className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold text-center">Feedback für SchnitzStück</h2>
+        <div>
+          <p>Wie gefällt Ihnen unsere Seite?</p>
+          <div className="flex gap-2 justify-center">
+            {['Sehr gut', 'Gut', 'Akzeptabel', 'Schlecht'].map((level) => (
+              <button
+                key={level}
+                type="button"
+                onClick={() => handleSatisfactionClick(level)}
+                className="btn btn-primary btn-sm"
+              >
+                {level}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="mb-4">
         <textarea
-          className="w-full p-2 border border-gray-300 rounded"
-          rows={4}
+          className="textarea textarea-bordered h-24"
           name="feedback"
           value={feedback}
           onChange={handleFeedbackChange}
           placeholder="Ihr Feedback hier..."
         />
-      </div>
-      <div className="mb-4">
-        <p className="mb-2">Ihre Nachricht zur Überprüfung:</p>
         <textarea
-          className="w-full p-2 border border-gray-300 rounded"
-          rows={6}
+          className="textarea textarea-bordered h-32"
           name="editableMessage"
           value={editableMessage}
           onChange={handleEditableMessageChange}
+          placeholder="Überprüfen und bearbeiten Sie Ihre Nachricht..."
         />
-      </div>
-      <div>
-        <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Feedback senden</button>
-      </div>
-    </form>
+        <button type="submit" className="btn btn-accent">Feedback senden</button>
+      </form>
+    </div>
   );
 };
 
