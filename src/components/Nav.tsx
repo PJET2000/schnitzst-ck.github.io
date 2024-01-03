@@ -1,14 +1,25 @@
-import { motion } from 'framer-motion'
+const gnom = '/Gnom.png'
+import {motion} from 'framer-motion'
 import { useState } from "react"
 import { useMediaQuery } from '../util/useMediaQuery'
 
-const gnom = '/Gnom.png'
 
 const navMotion = {
-    // ... (keine Änderungen hier)
+    visible: {
+        opacity:1,
+
+        transition: {
+            when: "beforeChildren",
+            staggerChildren: 0.15,
+        },
+    },
+    hidden: {
+        opacity: 0,
+    },
 }
 const itemMotion ={
-    // ... (keine Änderungen hier)
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -100 },
 }
 
 export default function Nav() {
@@ -16,7 +27,7 @@ export default function Nav() {
     const matches = useMediaQuery('(min-width: 1024px)')
 
     return (
-        <nav className="relative mx-8 mb-24 flex justify-between items-center pt-12 pb-6 font-medium md:mx-16 lg:mx-32 bg-base-100 text-base-content">
+        <nav className="relative mx-8 mb-24 flex justify-between items-center pt-12 pb-6 font-medium md:mx-16 lg:mx-32 bg-base-100 text-base-content hidden" id="navbar">
             <svg 
                 className="absolute bottom-0 left-1/2 -translate-x-1/2"
                 width="250"
@@ -34,7 +45,7 @@ export default function Nav() {
 
             </svg>
             <div>
-                <img src={gnom} alt="Profilbild von Gnom" style={{ width: '50px', height: 'auto' }} className='rounded-full'/>
+                <img src={gnom} alt="Profilbild von Gnom" className="rounded-full w-12 h-12"/>
             </div>  
 
             <h1 className="absolute left-1/2 -translate-x-1/2 bottom-0 mb-6 text-lg font-bold">

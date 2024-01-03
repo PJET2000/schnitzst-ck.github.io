@@ -31,41 +31,53 @@ const FeedbackForm: React.FC = () => {
   };
 
   return (
-    <div className="p-4 max-w-lg mx-auto bg-gray-800 text-white">
-      <form onSubmit={handleSubmit} name="feedback-form" method="POST" data-netlify="true" className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold text-center">Feedback für SchnitzStück</h2>
-        <div>
-          <p>Wie gefällt Ihnen unsere Seite?</p>
-          <div className="flex gap-2 justify-center">
-            {['Sehr gut', 'Gut', 'Akzeptabel', 'Schlecht'].map((level) => (
-              <button
-                key={level}
-                type="button"
-                onClick={() => handleSatisfactionClick(level)}
-                className="btn btn-primary btn-sm"
-              >
-                {level}
-              </button>
-            ))}
-          </div>
+    <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-4 max-w-4xl mx-auto" name="feedback-form" method="POST" data-netlify="true">
+      <h2 className="text-2xl font-bold mb-4">Feedback für SchnitzStück</h2>
+      <div className="form-control mb-4">
+        <label className="label">
+          <span className="label-text">Wie gefällt Ihnen unsere Seite?</span>
+        </label>
+        <div className="flex gap-2">
+          {['Sehr gut', 'Gut', 'Akzeptabel', 'Schlecht'].map((level) => (
+            <button
+              key={level}
+              type="button"
+              onClick={() => handleSatisfactionClick(level)}
+              className="btn btn-outline"
+            >
+              {level}
+            </button>
+          ))}
         </div>
+      </div>
+      <div className="form-control mb-4">
+        <label className="label">
+          <span className="label-text">Ihr Feedback:</span>
+        </label>
         <textarea
-          className="textarea textarea-bordered h-24"
+          className="textarea textarea-bordered w-full"
           name="feedback"
           value={feedback}
           onChange={handleFeedbackChange}
           placeholder="Ihr Feedback hier..."
         />
+      </div>
+      <div className="form-control mb-4">
+        <label className="label">
+          <span className="label-text">Überprüfen und bearbeiten Sie Ihre Nachricht:</span>
+        </label>
         <textarea
-          className="textarea textarea-bordered h-32"
+          className="textarea textarea-bordered w-full"
           name="editableMessage"
           value={editableMessage}
           onChange={handleEditableMessageChange}
           placeholder="Überprüfen und bearbeiten Sie Ihre Nachricht..."
         />
-        <button type="submit" className="btn btn-accent">Feedback senden</button>
-      </form>
-    </div>
+      </div>
+      <div className="form-control">
+        <button type="submit" className="btn btn-primary">Feedback senden</button>
+      </div>
+    </form>
   );
 };
 

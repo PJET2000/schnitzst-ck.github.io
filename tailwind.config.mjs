@@ -9,6 +9,6 @@ export default {
 	// darkMode: 'media',
 	plugins: [require("daisyui")],
 	daisyui: {
-		themes: ["dark"],
+		themes: ["black"],
 	},
 }
