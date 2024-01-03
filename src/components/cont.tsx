@@ -6,7 +6,7 @@ const FeedbackForm: React.FC = () => {
   const [editableMessage, setEditableMessage] = useState('');
 
   const handleSatisfactionClick = (level: string) => {
-    const satisfactionText = `Kundenzufriedenheit: ${level}`;
+    const satisfactionText = `Gefühlslage: ${level}`;
     setSatisfaction(satisfactionText);
     updateEditableMessage(satisfactionText, feedback);
   };
@@ -22,23 +22,37 @@ const FeedbackForm: React.FC = () => {
   };
 
   const updateEditableMessage = (satisfactionText: string, userFeedback: string) => {
-    setEditableMessage(`${satisfactionText}\nPersönliches Feedback: ${userFeedback}`);
+    setEditableMessage(`${satisfactionText}\nFreestyle-Feedback: ${userFeedback}`);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const encode = (data) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
+  const handleSubmit = e => {
     e.preventDefault();
-    alert(`Gesendetes Feedback:\n${editableMessage}`);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "feedback", ...{satisfaction, feedback, editableMessage} })
+    })
+    .then(() => alert("Dein sagenhaftes Feedback ist unterwegs zu den Sternen!"))
+    .catch(error => alert("Ups, da ist wohl was schiefgegangen: ", error));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-4 max-w-4xl mx-auto" name="feedback-form" method="POST" data-netlify="true">
-      <h2 className="text-2xl font-bold mb-4">Feedback für SchnitzStück</h2>
+    <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-6 max-w-4xl mx-auto my-8" name="feedback" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="feedback" />
+      <h2 className="text-2xl font-bold mb-4">Was hältst du bisher von SchnitzStück?</h2>
+      <p>Deine Meinung bringt uns von "Mäh" zu "Yay"!</p>
       <div className="form-control mb-4">
         <label className="label">
-          <span className="label-text">Wie gefällt Ihnen unsere Seite?</span>
+          <span className="label-text">Wie fühlst du dich auf unserer Seite?</span>
         </label>
         <div className="flex gap-2">
-          {['Sehr gut', 'Gut', 'Akzeptabel', 'Schlecht'].map((level) => (
+          {['Mega!', 'Naja...', 'Das wird nix!'].map((level) => (
             <button
               key={level}
               type="button"
@@ -52,30 +66,30 @@ const FeedbackForm: React.FC = () => {
       </div>
       <div className="form-control mb-4">
         <label className="label">
-          <span className="label-text">Ihr Feedback:</span>
+          <span className="label-text">Freestyle-Feedback:</span>
         </label>
         <textarea
           className="textarea textarea-bordered w-full"
           name="feedback"
           value={feedback}
           onChange={handleFeedbackChange}
-          placeholder="Ihr Feedback hier..."
+          placeholder="Hier kannst du mal so richtig die Sau rauslassen..."
         />
       </div>
       <div className="form-control mb-4">
         <label className="label">
-          <span className="label-text">Überprüfen und bearbeiten Sie Ihre Nachricht:</span>
+          <span className="label-text">Noch was auf dem Herzen?</span>
         </label>
         <textarea
           className="textarea textarea-bordered w-full"
           name="editableMessage"
           value={editableMessage}
           onChange={handleEditableMessageChange}
-          placeholder="Überprüfen und bearbeiten Sie Ihre Nachricht..."
+          placeholder="Feuer frei! Gib uns noch mehr Feedback..."
         />
       </div>
       <div className="form-control">
-        <button type="submit" className="btn btn-primary">Feedback senden</button>
+        <button type="submit" className="btn btn-primary">Ab damit ins Universum!</button>
       </div>
     </form>
   );
