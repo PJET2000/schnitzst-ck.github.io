@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 
 const FeedbackForm: React.FC = () => {
   const [satisfaction, setSatisfaction] = useState('');
@@ -8,39 +9,42 @@ const FeedbackForm: React.FC = () => {
   const handleSatisfactionClick = (level: string) => {
     const satisfactionText = `Bewertung: ${level}`;
     setSatisfaction(satisfactionText);
-    updateEditableMessage(satisfactionText, feedback);
+    setEditableMessage(`${satisfactionText}\nSags frei heraus: ${feedback}`); // Nur ein String-Argument
   };
-
-  const handleFeedbackChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  
+  const handleFeedbackChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newFeedback = e.target.value;
     setFeedback(newFeedback);
-    updateEditableMessage(satisfaction, newFeedback);
+    setEditableMessage(`Bewertung: ${satisfaction}\nSags frei heraus: ${newFeedback}`); // Nur ein String-Argument
   };
 
-  const handleEditableMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleEditableMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setEditableMessage(e.target.value);
   };
 
-  const updateEditableMessage = (satisfactionText: string, userFeedback: string) => {
-    setEditableMessage(`${satisfactionText}\nSags frei heraus: ${userFeedback}`);
-  };
-
-  const encode = (data) => {
+  const encode = (data: Record<string, string>) => {
     return Object.keys(data)
       .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
       .join("&");
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = {
+      "form-name": "feedback",
+      satisfaction,
+      feedback,
+      editableMessage
+    };
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "feedback", ...{satisfaction, feedback, editableMessage} })
+      body: encode(formData)
     })
     .then(() => alert("Dein Feedback wurde erfolgreich gesendet!"))
-    .catch(error => alert("Ups, da ist wohl was schiefgegangen: ", error));
+    .catch(error => alert("Ups, da ist wohl was schiefgegangen: " + JSON.stringify(error))); // Änderung hier
   };
+
 
   return (
     <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-6 max-w-4xl mx-auto my-8 text-center" name="feedback" method="POST" data-netlify="true">
