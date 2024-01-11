@@ -12,15 +12,19 @@
   "dependencies": {
     "@astrojs/check": "^0.3.4",
     "@astrojs/react": "^3.0.8",
+    "@astrojs/svelte": "^5.0.3",
     "@astrojs/tailwind": "^5.0.4",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "antd": "^5.12.8",
     "astro": "^4.0.7",
     "daisyui": "^4.5.0",
     "framer": "^2.4.1",
     "motion": "^10.16.4",
+    "rc-slider": "^10.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "svelte": "^4.2.8",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
   }
