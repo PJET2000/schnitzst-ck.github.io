@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
-import BudgetSlider from './slider';
+import { ConfigProvider, Slider} from 'antd';
 
 
-const FeedbackForm: React.FC = () => {
+const NachrichtForm: React.FC = () => {
   const [möbelstück, setMöbelstück] = useState('');
   const [selectedMöbelstück, setSelectedMöbelstück] = useState('');
   const [showTischOptions, setShowTischOptions] = useState(false);
@@ -12,17 +12,22 @@ const FeedbackForm: React.FC = () => {
   const [showAufbewahrungOptions, setShowAufbewahrungOptions] = useState(false);
   const [stil, setStil] = useState('');
   const [selectedStil, setSelectedStil] = useState('');
-  // const [budget, setBudget] = useState<[number, number]>([100, 10000]);
-  // const [isFlexibleBudget, setIsFlexibleBudget] = useState(false);
-  const [feedback, setFeedback] = useState('');
+  const [budget, setBudget] = useState([100, 10000]);
+  const [isFlexibleBudget, setIsFlexibleBudget] = useState(false);
+  const [formattedBudget, setFormattedBudget] = useState('Budget: 100€ - 10000€');
+  const [nachricht, setNachricht] = useState('');
   const [editableMessage, setEditableMessage] = useState('');
- 
+  const [email, setEmail] = useState('');
+
+
 
   const handleMöbelstückClick = (stück: string) => {
-    const möbelstückText = `Gewähltes Möbelstück: ${stück}`;
+    const möbelstückText = `Möbelstück: ${stück}\n`;
     setMöbelstück(möbelstückText);
-    setEditableMessage(`${möbelstückText}\n ${stil}`);
-    
+    setSelectedMöbelstück(stück);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}
+${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+  
     setSelectedMöbelstück(stück);
 
     if (stück === 'Tisch') {
@@ -51,10 +56,10 @@ const FeedbackForm: React.FC = () => {
   };
 
   const HandleMöbelstückOptionClick = (stück: string) => {
-    const möbelstückText = `Gewähltes Möbelstück: ${stück}`;
+    const möbelstückText = `Möbelstück: ${stück}\n`;
     setMöbelstück(möbelstückText);
-    setEditableMessage(`${möbelstückText}\n ${stil}`);
     setSelectedMöbelstück(stück);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
   const handleBackClick = () => {
@@ -72,30 +77,75 @@ const FeedbackForm: React.FC = () => {
   };
 
   const handleStilOptionClick = (stil: string) => {
-    const stilText = `Gewählter Stil: ${stil}`;
+    const stilText = `Stil: ${stil}\n`;
     setStil(stilText);
-    setEditableMessage(`${möbelstück}\n Gewählter Stil: ${stil}`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
     setSelectedStil(stil);
   };
 
-  // const onSliderChange = (values: [number, number]) => {
-  //   setBudget(values);
-  //   setIsFlexibleBudget(false);
-  // };
+// Budget :  
+  const theme = {
+    components: {
+        Slider: {
+            colorPrimary: '#db924b',
+            // algorithm: true, // Enable algorithm
+            colorPrimaryHover: '#c59f60',
+            colorPrimaryBorder: '#c59f60',
+            colorPrimaryBorderHover: '#db924b',
+            colorBgElevated: '#20161f',
+        },
+        Tooltip: {
+            colorTextLightSolid: '#20161f',
+            colorBgSpotlight: '#db924b',
+        }, },
+    };
+  const tipFormatter = (value: number | undefined): string => {
+  return value !== undefined ? `${value}€` : '';
+  };
 
-  // const toggleFlexibleBudget = () => {
-  //   setIsFlexibleBudget((prev) => !prev);
-  // };
+  const handleBudgetChange = (value: number[]) => {
+    const budgetText = `Budget: ${value[0]}€ - ${value[1]}€\n`;
+    setBudget(value);
+    setFormattedBudget(budgetText);
+    setIsFlexibleBudget(false);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+  };
 
-  const handleFeedbackChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const newFeedback = e.target.value;
-    setFeedback(newFeedback);
-    setEditableMessage(`${möbelstück}\n ${stil}\nBudget: ${budgetRange[0]}€ - ${budgetRange[1]}€\n Sags frei heraus: ${newFeedback}`);
+  const handleFlexibleBudgetClick = () => {
+    setIsFlexibleBudget(true);
+    setBudget([100, 10000]);
+    const budgetText = "Flexibles Budget\n";
+    setFormattedBudget(budgetText);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+  };
+// Ende Budget
+
+  const handleNachrichtChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const newNachricht = e.target.value;
+    setNachricht(newNachricht);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${newNachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
   const handleEditableMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setEditableMessage(e.target.value);
   };
+
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null); // Typ hinzugefügt
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'inherit'; // Jetzt weiß TypeScript, dass `style` existiert
+      textarea.style.height = `${textarea.scrollHeight +5}px`; // `scrollHeight` existiert auch
+    }
+  }, [editableMessage]); // Dieser Effekt wird ausgeführt, wenn sich `editableMessage` ändert
+
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
 
   const encode = (data: Record<string, string>) => {
     return Object.keys(data)
@@ -106,26 +156,32 @@ const FeedbackForm: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = {
-      "form-name": "feedback",
+      "form-name": "nachricht",
       möbelstück,
-      feedback,
-      editableMessage
+      stil, 
+      nachricht,
+      editableMessage,
+      email,
     };
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode(formData)
     })
-    .then(() => alert("Dein Feedback wurde erfolgreich gesendet!"))
+    .then(() => alert("Dein Nachricht wurde erfolgreich gesendet!"))
     .catch(error => alert("Ups, da ist wohl was schiefgegangen: " + JSON.stringify(error))); // Änderung hier
   };
 
 
       return (
-    <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-6 max-w-4xl mx-auto my-8 text-center" name="feedback" method="POST" data-netlify="true">
-      {/* ... (Rest des Formulars bis zu den Buttons) */}
+    <form onSubmit={handleSubmit} className="card bg-base-100 shadow-xl p-6 max-w-4xl mx-auto my-20 text-center" name="nachricht" method="POST" data-netlify="true">
+      <h1 className="text-3xl font-bold text-left" >Mein SchnitzStück:</h1>
+      <p className="text-lg text-left mb-10">Egal, ob du schon eine genaue Vorstellung hast oder noch nach Inspiration suchst - bei uns findest du dein persönliches SchnitzStück! Wir möchten deine Träume wahr werden lassen und finden bestimmt einen Weg, deine Vorstellungen in die Realität umzusetzen. Der folgende Pfad soll dir bei der Auswahl und Inspiration behilflich sein. Natürlich kannst du uns aber auch jederzeit direkt kontaktieren. Wir freuen uns darauf, von deinem SchnitzStück-Traum zu hören!</p>
+      {/* Möbelstück Auswahl */}
       <div className="form-control">
-        <div className="flex gap-2 justify-center">
+      <h2 className="text-2xl font-bold text-left" >Möbelstück:</h2>
+      <p className="text-lg text-left mb-10">Was für ein Möbelstück suchst du?</p>
+        <div className="flex flex-wrap gap-2 justify-center">
           {!showTischOptions && !showStuhlOptions && !showLampeOptions && !showAufbewahrungOptions && (
             <>
               {/* Die ursprünglichen Buttons */}
@@ -292,8 +348,9 @@ const FeedbackForm: React.FC = () => {
             </>
           )}
         </div>
-        <p className="text-lg mt-20">Welchen Stil hast du dir vorgestellt?</p>
-        <div className="flex gap-2 justify-center mt-10">
+        <h2 className="text-2xl font-bold text-left mt-20" >Stil:</h2>
+        <p className="text-lg text-left mb-10">Welchen Stil hast du dir vorgestellt?</p>
+        <div className="flex flex-wrap gap-2 justify-center">
         
           <button
             type="button"
@@ -318,38 +375,68 @@ const FeedbackForm: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="form-control mt-20">
-      <BudgetSlider client:load />
+      <h2 className="text-2xl font-bold text-left mt-20" >Budget:</h2>
+      <p className="text-lg text-left mb-10">Gibt es ein Budget für dein SchnitzStück?</p>
+      <div className="form-control">
+          <ConfigProvider theme={theme}>
+              <Slider
+                    range
+                    defaultValue={[100, 10000]}
+                    value={budget}
+                    onChange={handleBudgetChange}
+                    min={100}
+                    max={10000}
+                    tipFormatter={tipFormatter}
+                />
+              <button 
+                type="button"
+                onClick={handleFlexibleBudgetClick} 
+                className={`btn ${isFlexibleBudget ? 'btn-primary' : 'btn-outline'} mt-5`}
+              >
+                Ich habe kein festes Budget
+              </button>
+            </ConfigProvider>
       </div>
-            <div className="form-control my-4">
-        <label className="label">
-          <span className="label-text">Sags frei heraus!</span>
-        </label>
+      <h2 className="text-2xl font-bold text-left mt-20" >Freie Wünsche:</h2>
+      <p className="text-lg text-left mb-10">Gibt es ein bestimmtes Thema, das einbezogen werden soll? Hast du spezielle Wünsche bezüglich Formen, Materialien oder besonderen Gestaltungselementen? Lass es uns wissen und wir werden unser Bestes geben, deinen Traum zu verwirklichen!</p>
+            <div className="form-control">
         <textarea
           className="textarea textarea-bordered w-full"
-          name="feedback"
-          value={feedback}
-          onChange={handleFeedbackChange}
-          placeholder="Deine ehrliche Meinung..."
+          name="nachricht"
+          value={nachricht}
+          onChange={handleNachrichtChange}
+          placeholder="Besondere Wünsche (Optional)."
         />
       </div>
-      <div className="form-control mb-4">
-        <label className="label">
-          <span className="label-text">Gibt es noch etwas, das dir besonders gefällt oder was verbessert werden könnte?</span>
-        </label>
-        <textarea
-          className="textarea textarea-bordered w-full"
-          name="editableMessage"
-          value={editableMessage}
-          onChange={handleEditableMessageChange}
-          placeholder="Deine Gedanken hier..."
+      <h2 className="text-2xl font-bold text-left mt-20" >Nachricht:</h2>
+      <p className="text-lg text-left mb-10">Hier kannst du deine Nachricht nochmal kontrollieren oder uns eine freie Nachricht schreiben.</p>
+      <div className="form-control">
+      <textarea
+        ref={textareaRef}
+        className="textarea textarea-bordered w-full h-auto"
+        style={{ maxHeight: '50vh' }} // Setzt eine maximale Höhe
+        name="editableMessage"
+        value={editableMessage}
+        onChange={handleEditableMessageChange}
+        placeholder="Deine Nachricht hier..."
+      />
+    </div>
+    <h2 className="text-2xl font-bold text-left mt-20 mb-10" >E-Mail-Adresse:</h2>
+      <div className="form-control mb-10">
+        <input
+          type="email"
+          className="input input-bordered w-full"
+          name="email"
+          value={email}
+          onChange={handleEmailChange}
+          placeholder="Deine E-Mail-Adresse"
         />
       </div>
       <div className="form-control">
-        <button type="submit" className="btn btn-primary">Dein Feedback senden</button>
+        <button type="submit" className="btn btn-primary">Deine Nachricht senden</button>
       </div>
     </form>
   );
 };
 
-export default FeedbackForm;
+export default NachrichtForm;

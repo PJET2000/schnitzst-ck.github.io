@@ -1,47 +1,62 @@
 import React, { useState } from 'react';
-import { ConfigProvider, Slider } from 'antd';
+import { ConfigProvider, Slider} from 'antd';
 
 const App = () => {
-  const [budget, setBudget] = useState([100, 10000]);
+    const [budget, setBudget] = useState([100, 10000]);
+    const [isFlexibleBudget, setIsFlexibleBudget] = useState(false);
 
-  // Stellen Sie das Theme für Ant Design ein
+  
   const theme = {
-    primaryColor: '#c59f60', // Schriftfarbe Coffee Theme
-  };
+       components: {
+            Slider: {
+                colorPrimary: '#db924b',
+                // algorithm: true, // Enable algorithm
+                colorPrimaryHover: '#c59f60',
+                colorPrimaryBorder: '#c59f60',
+                colorPrimaryBorderHover: '#db924b',
+                colorBgElevated: '#20161f',
+            },
+            Tooltip: {
+                colorTextLightSolid: '#20161f',
+                colorBgSpotlight: '#db924b',
+            }, },
+        };
+const tipFormatter = (value: number | undefined): string => {
+    return value !== undefined ? `${value}€` : '';
+    };
 
-  const handleStyle = {
-    borderColor: theme.primaryColor,
-    // height: '24px', // Dickerer Griff
-    // width: '24px', // Dickerer Griff
-    // marginTop: '-12px', // Anpassung der Position, damit der Griff mittig bleibt
-    backgroundColor: theme.primaryColor, // Griffhintergrund
-  };
+    const handleBudgetChange = (value: number[]) => {
+        setBudget(value);
+        setIsFlexibleBudget(false); // Aktiviert den Slider wieder
+    };
+    
+    const handleFlexibleBudgetClick = () => {
+        setIsFlexibleBudget(true); // Deaktiviert den Slider
+        setBudget([100, 10000]); // Setzt den Slider zurück
+    };
+    
 
-  const trackStyle = {
-     backgroundColor: theme.primaryColor, // Gefüllter Teil der Spur
-    // height: '10px', // Dickerer gefüllter Teil der Spur
-  };
-
-  const railStyle = {
-    backgroundColor: '#20161f', // Hintergrundfarbe Coffee Theme
-    // height: '10px', // Dickerer nicht gefüllter Teil der Spur
-  };
-
-  return (
-    <ConfigProvider theme={{ primaryColor: theme.primaryColor }}>
-      <Slider
-        range
-        defaultValue={[100, 10000]}
-        value={budget}
-        onChange={setBudget}
-        min={100}
-        max={10000}
-        handleStyle={handleStyle}
-        trackStyle={trackStyle}
-        railStyle={railStyle}
-      />
-    </ConfigProvider>
-  );
-};
-
+    return (
+        <ConfigProvider theme={theme}>
+          <Slider
+                range
+                defaultValue={[100, 10000]}
+                value={budget}
+                onChange={handleBudgetChange}
+                min={100}
+                max={10000}
+                tipFormatter={tipFormatter}
+                // disabled={isFlexibleBudget} // Der Slider wird basierend auf isFlexibleBudget deaktiviert/aktiviert
+            />
+          <button 
+            type="button"
+            onClick={handleFlexibleBudgetClick} 
+            className={`btn ${isFlexibleBudget ? 'btn-primary' : 'btn-outline'} mt-2`}
+          >
+            Ich habe kein festes Budget
+          </button>
+        </ConfigProvider>
+      );
+    };
+        
 export default App;

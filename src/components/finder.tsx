@@ -1,47 +1,86 @@
 import React, { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
+import BudgetSlider from './slider';
+
 
 const FeedbackForm: React.FC = () => {
-  const [satisfaction, setSatisfaction] = useState('');
+  const [möbelstück, setMöbelstück] = useState('');
+  const [selectedMöbelstück, setSelectedMöbelstück] = useState('');
+  const [showTischOptions, setShowTischOptions] = useState(false);
+  const [showStuhlOptions, setShowStuhlOptions] = useState(false);
+  const [showLampeOptions, setShowLampeOptions] = useState(false);
+  const [showAufbewahrungOptions, setShowAufbewahrungOptions] = useState(false);
+  const [stil, setStil] = useState('');
+  const [selectedStil, setSelectedStil] = useState('');
   const [feedback, setFeedback] = useState('');
   const [editableMessage, setEditableMessage] = useState('');
-  const [showMegaOptions, setShowMegaOptions] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+ 
 
-  const handleSatisfactionClick = (level: string) => {
-    const satisfactionText = `Bewertung: ${level}`;
-    setSatisfaction(satisfactionText);
-    setEditableMessage(`${satisfactionText}\nSags frei heraus: ${feedback}`);
+  const handleMöbelstückClick = (stück: string) => {
+    const möbelstückText = `Gewähltes Möbelstück: ${stück}`;
+    setMöbelstück(möbelstückText);
+    setEditableMessage(`${möbelstückText}\n ${stil}`);
     
-    setSelectedOption(level);
+    setSelectedMöbelstück(stück);
 
-    if (level === 'Mega! 😍') {
-      setShowMegaOptions(true);
+    if (stück === 'Tisch') {
+      setShowTischOptions(true);
     } else {
-      setShowMegaOptions(false);
+      setShowTischOptions(false);
+    }
+
+    if (stück === 'Stuhl') {
+      setShowStuhlOptions(true);
+    } else {
+      setShowStuhlOptions(false);
+    }
+
+    if (stück === 'Lampe') {
+      setShowLampeOptions(true);
+    } else {
+      setShowLampeOptions(false);
+    }
+
+    if (stück === 'Aufbewahrung') {
+      setShowAufbewahrungOptions(true);
+    } else {
+      setShowAufbewahrungOptions(false);
     }
   };
 
-  const handleMegaOptionClick = (level: string) => {
-    const satisfactionText = `Bewertung: ${level}`;
-    setSatisfaction(satisfactionText);
-    setEditableMessage(`${satisfactionText}\nSags frei heraus: ${feedback}`);
-    setSelectedOption(level);
+  const HandleMöbelstückOptionClick = (stück: string) => {
+    const möbelstückText = `Gewähltes Möbelstück: ${stück}`;
+    setMöbelstück(möbelstückText);
+    setEditableMessage(`${möbelstückText}\n ${stil}`);
+    setSelectedMöbelstück(stück);
   };
 
   const handleBackClick = () => {
-    setShowMegaOptions(false);
-    setSelectedOption(''); // Setzt die Auswahl zurück, damit die ursprünglichen Optionen angezeigt werden
+    setShowTischOptions(false);
+    setShowStuhlOptions(false);
+    setShowLampeOptions(false);
+    setShowAufbewahrungOptions(false);
+    setSelectedMöbelstück(''); // Setzt die Auswahl zurück, damit die ursprünglichen Optionen angezeigt werden
   };
 
-  const getButtonClass = (level: string) => {
-    return `btn ${level === selectedOption ? 'btn-primary' : 'btn-outline'} flex-1`;
+  const getButtonClass = (value: string) => {
+    const isSelectedMöbelstück = value === selectedMöbelstück;
+    const isSelectedStil = value === selectedStil;
+    return `btn ${isSelectedMöbelstück || isSelectedStil ? 'btn-primary' : 'btn-outline'} flex-1`;
   };
+
+  const handleStilOptionClick = (stil: string) => {
+    const stilText = `Gewählter Stil: ${stil}`;
+    setStil(stilText);
+    setEditableMessage(`${möbelstück}\n Gewählter Stil: ${stil}`);
+    setSelectedStil(stil);
+  };
+
 
   const handleFeedbackChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newFeedback = e.target.value;
     setFeedback(newFeedback);
-    setEditableMessage(`Bewertung: ${satisfaction}\nSags frei heraus: ${newFeedback}`); // Nur ein String-Argument
+    setEditableMessage(`${möbelstück}\n ${stil}\nBudget: ${budgetRange[0]}€ - ${budgetRange[1]}€\n Sags frei heraus: ${newFeedback}`);
   };
 
   const handleEditableMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -58,7 +97,7 @@ const FeedbackForm: React.FC = () => {
     e.preventDefault();
     const formData = {
       "form-name": "feedback",
-      satisfaction,
+      möbelstück,
       feedback,
       editableMessage
     };
@@ -77,48 +116,161 @@ const FeedbackForm: React.FC = () => {
       {/* ... (Rest des Formulars bis zu den Buttons) */}
       <div className="form-control">
         <div className="flex gap-2 justify-center">
-          {!showMegaOptions && (
+          {!showTischOptions && !showStuhlOptions && !showLampeOptions && !showAufbewahrungOptions && (
             <>
               {/* Die ursprünglichen Buttons */}
               <button
                 type="button"
-                onClick={() => handleSatisfactionClick('Mega! 😍')}
-                className={getButtonClass('Mega! 😍')}
+                onClick={() => handleMöbelstückClick('Tisch')}
+                className={getButtonClass('Tisch')}
               >
-                Mega! 😍
+                Tisch
               </button>
               <button
                 type="button"
-                onClick={() => handleSatisfactionClick('Naja... 🤔')}
-                className={getButtonClass('Naja... 🤔')}
+                onClick={() => handleMöbelstückClick('Stuhl')}
+                className={getButtonClass('Stuhl')}
               >
-                Naja... 🤔
+                Stuhl
               </button>
               <button
                 type="button"
-                onClick={() => handleSatisfactionClick('Das wird nix! 😒')}
-                className={getButtonClass('Das wird nix! 😒')}
+                onClick={() => handleMöbelstückClick('Lampe')}
+                className={getButtonClass('Lampe')}
               >
-                Das wird nix! 😒
+                Lampe
+              </button>
+              <button
+                type="button"
+                onClick={() => handleMöbelstückClick('Aufbewahrung')}
+                className={getButtonClass('Aufbewahrung')}
+              >
+                Aufbewahrung
+              </button>
+              <button
+                type="button"
+                onClick={() => handleMöbelstückClick('Überraschung')}
+                className={getButtonClass('Überraschung')}
+              >
+                Überrascht mich!
               </button>
             </>
           )}
-          {showMegaOptions && (
+          {showTischOptions && (
             <>
-              {/* Die Mega-Options-Buttons */}
+              {/* Die Tisch-Options-Buttons */}
               <button
                 type="button"
-                onClick={() => handleMegaOptionClick('Super Mega! 🌟')}
-                className={getButtonClass('Super Mega! 🌟')}
+                onClick={() => HandleMöbelstückOptionClick('Esstisch')}
+                className={getButtonClass('Esstisch')}
               >
-                Super Mega! 🌟
+                Esstisch
               </button>
               <button
                 type="button"
-                onClick={() => handleMegaOptionClick('Normal Mega! 👍')}
-                className={getButtonClass('Normal Mega! 👍')}
+                onClick={() => HandleMöbelstückOptionClick('Schreibtisch')}
+                className={getButtonClass('Schreibtisch')}
               >
-                Normal Mega! 👍
+                Schreibtisch
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Nachttisch')}
+                className={getButtonClass('Nachttisch')}
+              >
+                Nachttisch
+              </button>
+              <button
+                type="button"
+                onClick={handleBackClick}
+                className="btn btn-ghost flex-1"
+              >
+                Zurück
+              </button>
+            </>
+          )}
+          {showStuhlOptions && (
+            <>
+              {/* Die Stuhl-Options-Buttons */}
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Hocker')}
+                className={getButtonClass('Hocker')}
+              >
+               Hocker
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Esszimmerstuhl')}
+                className={getButtonClass('Esszimmerstuhl')}
+              >
+                Esszimmerstuhl
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Sessel')}
+                className={getButtonClass('Sessel')}
+              >
+               Sessel
+              </button>
+              <button
+                type="button"
+                onClick={handleBackClick}
+                className="btn btn-ghost flex-1"
+              >
+                Zurück
+              </button>
+            </>
+          )}
+          {showLampeOptions && (
+            <>
+              {/* Die Lampe-Options-Buttons */}
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Deckenlampe')}
+                className={getButtonClass('Deckenlampe')}
+              >
+               Deckenlampe
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Stehlampe')}
+                className={getButtonClass('Stehlampe')}
+              >
+                Stehlampe
+              </button>
+              <button
+                type="button"
+                onClick={handleBackClick}
+                className="btn btn-ghost flex-1"
+              >
+                Zurück
+              </button>
+            </>
+          )}
+          {showAufbewahrungOptions && (
+            <>
+              {/* Die Aufbewahrung-Options-Buttons */}
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Schrank')}
+                className={getButtonClass('Schrank')}
+              >
+               Schrank
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Regal')}
+                className={getButtonClass('Regal')}
+              >
+                Regal
+              </button>
+              <button
+                type="button"
+                onClick={() => HandleMöbelstückOptionClick('Kommode')}
+                className={getButtonClass('Kommode')}
+              >
+               Kommode
               </button>
               <button
                 type="button"
@@ -130,6 +282,34 @@ const FeedbackForm: React.FC = () => {
             </>
           )}
         </div>
+        <p className="text-lg mt-20">Welchen Stil hast du dir vorgestellt?</p>
+        <div className="flex gap-2 justify-center mt-10">
+        
+          <button
+            type="button"
+            onClick={() => handleStilOptionClick('Abstrakt')}
+            className={getButtonClass('Abstrakt')}
+          >
+            Abstrakt
+          </button>
+          <button
+            type="button"
+            onClick={() => handleStilOptionClick('Detailreich')}
+            className={getButtonClass('Detailreich')}
+          >
+            Detailreich
+          </button>
+          <button
+            type="button"
+            onClick={() => handleStilOptionClick('Überraschung2')}
+            className={getButtonClass('Überraschung2')}
+          >
+            Überrascht mich!
+          </button>
+        </div>
+      </div>
+      <div className="form-control mt-20">
+      <BudgetSlider client:load />
       </div>
             <div className="form-control my-4">
         <label className="label">
