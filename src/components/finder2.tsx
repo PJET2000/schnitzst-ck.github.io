@@ -25,7 +25,7 @@ const NachrichtForm: React.FC = () => {
     const möbelstückText = `Möbelstück: ${stück}\n`;
     setMöbelstück(möbelstückText);
     setSelectedMöbelstück(stück);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstückText}${stil}${formattedBudget}
 ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   
     setSelectedMöbelstück(stück);
@@ -59,7 +59,7 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
     const möbelstückText = `Möbelstück: ${stück}\n`;
     setMöbelstück(möbelstückText);
     setSelectedMöbelstück(stück);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstückText}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
   const handleBackClick = () => {
@@ -79,7 +79,7 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
   const handleStilOptionClick = (stil: string) => {
     const stilText = `Stil: ${stil}\n`;
     setStil(stilText);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stilText}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
     setSelectedStil(stil);
   };
 
@@ -215,8 +215,8 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
               </button>
               <button
                 type="button"
-                onClick={() => handleMöbelstückClick('Überraschung')}
-                className={getButtonClass('Überraschung')}
+                onClick={() => handleMöbelstückClick('Überrascht mich!')}
+                className={getButtonClass('Überrascht mich!')}
               >
                 Überrascht mich!
               </button>
@@ -368,8 +368,8 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
           </button>
           <button
             type="button"
-            onClick={() => handleStilOptionClick('Überraschung2')}
-            className={getButtonClass('Überraschung2')}
+            onClick={() => handleStilOptionClick('Überrascht mich:)')}
+            className={getButtonClass('Überrascht mich:)')}
           >
             Überrascht mich!
           </button>
