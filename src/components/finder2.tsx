@@ -16,6 +16,7 @@ const NachrichtForm: React.FC = () => {
   const [isFlexibleBudget, setIsFlexibleBudget] = useState(false);
   const [formattedBudget, setFormattedBudget] = useState('Budget: 100€ - 10000€');
   const [nachricht, setNachricht] = useState('');
+  const [formattedNachricht, setFormattedNachricht] = useState('');
   const [editableMessage, setEditableMessage] = useState('');
   const [email, setEmail] = useState('');
 
@@ -26,7 +27,7 @@ const NachrichtForm: React.FC = () => {
     setMöbelstück(möbelstückText);
     setSelectedMöbelstück(stück);
     setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstückText}${stil}${formattedBudget}
-${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+${formattedNachricht}\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   
     setSelectedMöbelstück(stück);
 
@@ -59,7 +60,7 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
     const möbelstückText = `Möbelstück: ${stück}\n`;
     setMöbelstück(möbelstückText);
     setSelectedMöbelstück(stück);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstückText}${stil}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstückText}${stil}${formattedBudget}${formattedNachricht}\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
   const handleBackClick = () => {
@@ -79,7 +80,7 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
   const handleStilOptionClick = (stil: string) => {
     const stilText = `Stil: ${stil}\n`;
     setStil(stilText);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stilText}${formattedBudget}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stilText}${formattedBudget}${formattedNachricht}\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
     setSelectedStil(stil);
   };
 
@@ -108,7 +109,7 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
     setBudget(value);
     setFormattedBudget(budgetText);
     setIsFlexibleBudget(false);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${formattedNachricht}\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
   const handleFlexibleBudgetClick = () => {
@@ -116,13 +117,13 @@ ${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüße
     setBudget([100, 10000]);
     const budgetText = "Flexibles Budget\n";
     setFormattedBudget(budgetText);
-    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${nachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
+    setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${budgetText}${formattedNachricht}\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 // Ende Budget
-
   const handleNachrichtChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const newNachricht = e.target.value;
     setNachricht(newNachricht);
+    setFormattedNachricht(`Freie Nachricht: ${newNachricht}\n`);
     setEditableMessage(`Hallo liebes SchnitzStück Team,\n\nich bin auf der Suche nach einem einzigartigen Möbelstück. Hier sind einige Details zu meinem Wunsch:\n\n${möbelstück}${stil}${formattedBudget}${newNachricht}\n\nIch freue mich darauf, von euch zu hören.\n\nMit besten Grüßen`);
   };
 
