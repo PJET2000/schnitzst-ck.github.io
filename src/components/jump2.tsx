@@ -21,9 +21,9 @@ const Jump: React.FC = () => {
     return () => unsubscribeY();
   }, [scrollY]);
 
-  const navbarHeight = 60;
-  const finalImageHeight = 50; // Final height of the image in the navbar
-  const finalTopOffset = (navbarHeight - finalImageHeight) / 2; // Center the image in the navbar
+  const navbarHeight = 5;
+  const finalImageHeight = 65; // Final height of the image in the navbar
+  const finalTopOffset = (navbarHeight- finalImageHeight) / 2; // Center the image in the navbar
 
   const initialScale = 1;
   const finalScale = finalImageHeight / 300; // Adjust the scale based on the final image height
@@ -33,9 +33,9 @@ const Jump: React.FC = () => {
 
   // UseSpring to add a spring animation to the scale
   const springScale = useSpring(scale, {
-    stiffness: 1000,
+    stiffness: 800,
     damping: 30,
-    mass: 1.5
+    mass: 1.2
   });
 
   const topOffset = isFixed ? `${finalTopOffset}px` : '50%';
@@ -43,27 +43,36 @@ const Jump: React.FC = () => {
 
 
 
-  const logoStyle = {
-    scale: springScale,
-    y: yTransform,
-    position: isFixed ? 'fixed' : 'absolute',
-    top: topOffset,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: 'auto',
-    height: isFixed ? `${finalImageHeight}px` : '300px',
-    zIndex: 10,
-  };
-  
-  return (
-    <>
-      <div style={{ height: '100vh' }}></div>
 
-      <motion.div className="bg-base-100 w-full items-center flex justify-center h-20 mt-5">
-        <AnimatedLogo style={logoStyle} />
-      </motion.div>
-    </>
-  );
+  // Wrapper styles
+const wrapperStyle = {
+  position: isFixed ? 'fixed' : 'absolute',
+  top: isFixed ? `${finalTopOffset}px` : '50%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  zIndex: 50,
+  marginTop: 30,
+};
+
+// AnimatedLogo component styles
+const svgStyle = {
+  scale: springScale,
+  height: isFixed ? `${finalImageHeight}px` : '300px',
+  marginTop: 0, 
+};
+
+
+  
+
+return (
+  <>
+    <div style={{ height: '100vh' }}></div>
+
+    <div style={wrapperStyle} className="bg-base-100 w-full items-center flex justify-center h-20 mt-5">
+      <AnimatedLogo style={svgStyle} />
+    </div>
+  </>
+);
 };
 
 export default Jump;
