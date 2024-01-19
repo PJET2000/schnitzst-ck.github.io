@@ -66,7 +66,7 @@ const svgStyle = {
 
 return (
   <>
-    <div className="h-screen text-base-100">hallo</div>
+    
 
     <div style={wrapperStyle} className="bg-base-100 w-full items-center flex justify-center h-20 mt-5">
       <AnimatedLogo style={svgStyle} />
