@@ -5,6 +5,7 @@ const description = "Ihre Vision, unser Handwerk. Bei SchnitzStück in München 
 const preloadImage = '/Sessel.jpg'; // Pfad zu Ihrem Hauptbild
 import Nav from "../components/Nav"
 import Footer from "../components/footer.astro"
+import Jump from "../components/jump2"
 ---
 
 <html lang="de">
@@ -20,7 +21,8 @@ import Footer from "../components/footer.astro"
     <!-- Weitere Scripts und Stylesheets, falls benötigt -->
   </head>
   <body>
-    <Nav />
+    <Jump client:only="react" />
+    <!-- <Nav client:load/> -->
     <main>
       <!-- Deine Navigationsleiste und weitere Inhalte -->
       <slot />

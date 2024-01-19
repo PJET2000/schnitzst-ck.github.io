@@ -1,0 +1,11 @@
+@keyframes strokeOffset {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .mask {
+    fill: none;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+  }

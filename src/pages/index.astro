@@ -5,11 +5,15 @@ import Gallery from "./gallery.astro"
 import Logo from "../components/logo.astro"
 // import Contact from "../components/cont"
 import Finder from "../components/finder2"
+import Jump from "../components/jump"
+import AnimatedLogo from "../components/logo"
 ---
 
 <MainLayout title="SchnitzStück">
 
-    <Logo />
+    <!-- <Jump client:load /> -->
+    <!-- <Logo /> -->
+    <!-- <AnimatedLogo client:load/> -->
     <Intro />
     <Finder client:load />
     <Gallery />
