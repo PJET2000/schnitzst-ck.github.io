@@ -33,9 +33,9 @@ const Jump: React.FC = () => {
 
   // UseSpring to add a spring animation to the scale
   const springScale = useSpring(scale, {
-    stiffness: 800,
+    stiffness: 400,
     damping: 30,
-    mass: 1.2
+    mass: 1.05
   });
 
   const topOffset = isFixed ? `${finalTopOffset}px` : '50%';
@@ -66,7 +66,7 @@ const svgStyle = {
 
 return (
   <>
-    <div style={{ height: '100vh' }}></div>
+    <div className="h-screen text-base-100">hallo</div>
 
     <div style={wrapperStyle} className="bg-base-100 w-full items-center flex justify-center h-20 mt-5">
       <AnimatedLogo style={svgStyle} />
