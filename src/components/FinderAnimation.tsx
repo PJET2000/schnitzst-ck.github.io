@@ -2,15 +2,19 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Finder from "./finder2";
 
-const AnimatedComponent = ({ Component, offset }) => {
+// Definiere einen Typ für die Props
+interface AnimatedComponentProps {
+  Component: React.FC; // oder React.ReactNode, wenn du JSX-Elemente übergeben möchtest
+}
+
+const AnimatedComponent: React.FC<AnimatedComponentProps> = ({ Component }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["0 1", "0.8 1"], // Ensure the offset is passed as a prop
+    offset: ["0 1", "0.8 1"],
   });
   const scaleProgress = useTransform(scrollYProgress, [0,1], [0.8, 1]);
 
-  // Assuming the Finder component can accept and use a style prop
   return (
     <motion.div ref={ref}
       style={{
@@ -27,7 +31,7 @@ const AnimatedComponent = ({ Component, offset }) => {
 const AnimatedHeadings = () => {
   return (
     <div>
-      <AnimatedComponent Component={Finder} /> {/* Adjust the offset to match when you want the Finder to animate */}
+      <AnimatedComponent Component={Finder} />
     </div>
   );
 };
