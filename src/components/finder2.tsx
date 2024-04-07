@@ -187,9 +187,6 @@ const handleNachrichtClick = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    
-    
     const formData = {
       "form-name": "nachricht",
       möbelstück,
