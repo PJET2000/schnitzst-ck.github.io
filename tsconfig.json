@@ -9,6 +9,5 @@
     "src/**/*.tsx",
     "src/env.d.ts",
     "src/declarations.d.ts"
-
   ]
 }

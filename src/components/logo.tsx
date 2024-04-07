@@ -2,36 +2,42 @@ import React, { useEffect} from 'react';
 import { useSpring, motion } from 'framer-motion';
 import './AnimatedLogo.css';
 
+// Define the props interface if you're passing a style object
+interface AnimatedLogoProps {
+  style?: React.CSSProperties;
+}
 
-const AnimatedLogo = ({ style }) => {
-    useEffect(() => {
-        const totalAnimationTime = 3; // Total animation time in seconds
-        const masks = ["Schnit", "t2", "t3", "t4", "z", "z2", "Stuck", "dot"];
-      
-        let totalLength = 0;
-        masks.forEach(mask => {
-          const path = document.querySelector(`#mask-${mask}`);
-          if (path) {
-            const length = path.getTotalLength();
-            totalLength += length;
-          }
-        });
-      
-        let accumulatedDelay = 0;
-        masks.forEach(mask => {
-          const path = document.querySelector(`#mask-${mask}`);
-          if (path) {
-            const length = path.getTotalLength();
-            const duration = (length / totalLength) * totalAnimationTime;
-            
-            path.style.strokeDasharray = `${length}`;
-            path.style.strokeDashoffset = `${length}`;
-            path.style.animation = `strokeOffset ${duration}s linear ${accumulatedDelay}s forwards`;
-      
-            accumulatedDelay += duration; // Increment the delay for the next path
-          }
-        });
+const AnimatedLogo: React.FC<AnimatedLogoProps> = ({ style }) => {
+  useEffect(() => {
+    const totalAnimationTime = 4; // Total animation time in seconds
+    const masks = ["Schnit", "t2", "t3", "t4", "z", "z2", "Stuck", "dot"];
+
+    let totalLength = 0;
+    masks.forEach(mask => {
+      // Ensure path is of the correct type
+      const path = document.querySelector(`#mask-${mask}`) as SVGPathElement | null;
+      if (path) {
+        const length = path.getTotalLength();
+        totalLength += length;
+      }
     });
+
+    let accumulatedDelay = 0;
+    masks.forEach(mask => {
+      // Ensure path is of the correct type
+      const path = document.querySelector(`#mask-${mask}`) as SVGPathElement | null;
+      if (path) {
+        const length = path.getTotalLength();
+        const duration = (length / totalLength) * totalAnimationTime;
+
+        path.style.strokeDasharray = `${length}`;
+        path.style.strokeDashoffset = `${length}`;
+        path.style.animation = `strokeOffset ${duration}s linear ${accumulatedDelay}s forwards`;
+
+        accumulatedDelay += duration; // Increment the delay for the next path
+      }
+    });
+  }, []); 
 
 
 
@@ -40,8 +46,9 @@ const AnimatedLogo = ({ style }) => {
     <motion.svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="51.223095 66.41675 141.64854 72.242683"
-    className="fill-current text-base-content w-11/12 xl:w-8/12"
+    className="fill-current text-base-content w-full z-50 justify-center items-center"
     style={style}
+    height="100%"
   >
     <title>Logo von SchnitzStück</title>
     <desc>Animation des SchnitzStück-Logos.</desc>

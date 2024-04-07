@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useViewportScroll, useTransform, useSpring } from 'framer-motion';
+import AnimatedLogo from './logo'; // Import the AnimatedLogo component
+import AnimatedLine from './LineAnimation';
+
 
 const Jump: React.FC = () => {
   const { scrollY } = useViewportScroll();
@@ -19,11 +22,11 @@ const Jump: React.FC = () => {
     return () => unsubscribeY();
   }, [scrollY]);
 
-  const navbarHeight = 60;
-  const finalImageHeight = 50; // Final height of the image in the navbar
-  const finalTopOffset = (navbarHeight - finalImageHeight) / 2; // Center the image in the navbar
+  const navbarHeight = 5;
+  const finalImageHeight = 65; // Final height of the image in the navbar
+  const finalTopOffset = (navbarHeight- finalImageHeight) / 2; // Center the image in the navbar
 
-  const initialScale = 1;
+  const initialScale = 1.5;
   const finalScale = finalImageHeight / 300; // Adjust the scale based on the final image height
 
   // Applying useTransform to get a variable scale value based on scroll
@@ -31,36 +34,57 @@ const Jump: React.FC = () => {
 
   // UseSpring to add a spring animation to the scale
   const springScale = useSpring(scale, {
-    stiffness: 1000,
+    stiffness: 400,
     damping: 30,
-    mass: 1.5
+    mass: 1.05
   });
 
   const topOffset = isFixed ? `${finalTopOffset}px` : '50%';
   const yTransform = isFixed ? '-40%' : '-50%';
 
-  return (
-    <>
-      {/* Placeholder box to push content down */}
-      <div style={{ height: '100vh' }}></div>
 
-      <motion.div style={{
-        position: isFixed ? 'fixed' : 'absolute',
-        top: topOffset,
-        left: '50%',
-        transform: `translateX(-50%) translateY(${yTransform})`,
-        zIndex: 10,
-        height: '100v',
 
-      }} className="bg-base-100 w-full items-center flex justify-center h-20 mt-5">
-        <motion.img 
-          src="/Gnom.png"
-          alt="Gnom"
-          style={{ scale: springScale, width: 'auto', height: '300px' }} // Apply the springScale here
-        />
-      </motion.div>
-    </>
-  );
+
+  // Wrapper styles
+const wrapperStyle = {
+  position: isFixed ? 'fixed' : 'absolute',
+  top: isFixed ? `${finalTopOffset}px` : '50%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  zIndex: 50,
+  marginTop: 30,
+};
+
+// AnimatedLogo component styles
+const svgStyle = {
+  scale: springScale,
+  height: isFixed ? `${finalImageHeight}px` : '300px',
+  marginTop: 0, 
+};
+
+const lineStyle = {
+  scale: springScale,
+  height: isFixed ? `${finalImageHeight}px` : '500px',
+  marginTop: 0, 
+};
+
+
+  
+
+return (
+  <>
+    
+
+    <div style={wrapperStyle} className="bg-base-100/0 w-full items-center flex flex-col justify-center h-20 mt-5 drop-shadow-xl">
+      
+     <AnimatedLogo style={svgStyle} />
+      <AnimatedLine style={lineStyle}/>
+    </div>
+
+
+
+  </>
+);
 };
 
 export default Jump;

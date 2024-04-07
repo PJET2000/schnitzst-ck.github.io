@@ -6,7 +6,13 @@ const preloadImage = '/Sessel.jpg'; // Pfad zu Ihrem Hauptbild
 import Nav from "../components/Nav"
 import Footer from "../components/footer.astro"
 import Jump from "../components/jump2"
+
+import { motion } from 'framer-motion';
+import { animationVariants, useScrollAnimation } from '../components/inoutanimation';
+import AnimatedLine from "../components/LineAnimation"
 ---
+
+
 
 <html lang="de">
   <head>
@@ -20,13 +26,33 @@ import Jump from "../components/jump2"
     <link rel="preload" as="image" href={preloadImage}>
     <!-- Weitere Scripts und Stylesheets, falls benötigt -->
   </head>
-  <body>
+  <body class="bg-[url('ContourBackground.svg')] bg-fixed bg-contain">
+
+    
     <Jump client:only="react" />
+  
     <!-- <Nav client:load/> -->
-    <main>
-      <!-- Deine Navigationsleiste und weitere Inhalte -->
-      <slot />
-    </main>
+    <div class='w-full h-[86px] fixed top-0 left-0 z-40'>
+
+      <div class='w-full h-[76px] fixed top-0 left-0 z-40 bg-[url("ContourBackground.svg")] bg-fixed bg-contain bg-no-repeat'></div>
+    
+      <img src="/LineMaskSmall.svg" alt="LineMaskSmall" class="absolute w-full bottom-0 h-3 px-2 xl:px-20"  />
+      <!-- <img src="/MaskRectangle.svg" class="absolute w-full bottom-[0.7rem] h-32"  /> -->
+     
+
+  <!--     <img src="/Line.svg" alt="Line" class="absolute w-full bottom-0 h-3 px-2 xl:px-20 z-50" /> -->
+      
+
+
+    </div>
+
+
+    <div class="body"> 
+      <main>
+        <slot />
+        
+      </main>
+    </divc>
+
+    
     <Footer />
-  </body>
-</html>

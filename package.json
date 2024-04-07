@@ -17,6 +17,7 @@
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "antd": "^5.12.8",
+    "aos": "^2.3.4",
     "astro": "^4.0.7",
     "daisyui": "^4.5.0",
     "framer": "^2.4.1",
@@ -29,5 +30,9 @@
     "svelte": "^4.2.8",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
