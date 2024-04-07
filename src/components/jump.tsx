@@ -20,7 +20,7 @@ const Jump: React.FC = () => {
   const initialColor = "#b78765"; // Inital Color Line
   const finalColor = "#FFF5ED"; // Final ColorLine
 
-//  const lineColor = useTransform(scrollY, [0, window.innerHeight * 0.46], [initialColor, finalColor]);
+  const lineColor = useTransform(scrollY, [0, window.innerHeight * 0.46], [initialColor, finalColor]);
 
   
 
@@ -117,7 +117,7 @@ const Jump: React.FC = () => {
         <AnimatedLogo />
       </motion.div>
       <motion.div style={{ width: springLineWidth, height: springLineHeight }}>
-        <AnimatedLine width={''} height={''} />
+        <AnimatedLine color={lineColor} />
       </motion.div>
   
       </div>
