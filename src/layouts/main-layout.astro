@@ -26,7 +26,7 @@ import AnimatedLine from "../components/LineAnimation"
     <link rel="preload" as="image" href={preloadImage}>
     <!-- Weitere Scripts und Stylesheets, falls benötigt -->
   </head>
-  <body class="bg-[url('ContourBackground.svg')] bg-fixed bg-contain">
+  <body class="bg-[url('/public/ContourBackground.svg')] bg-fixed bg-contain">
 
     
     <Jump client:only="react" />
@@ -34,7 +34,7 @@ import AnimatedLine from "../components/LineAnimation"
     <!-- <Nav client:load/> -->
     <div class='w-full h-[86px] fixed top-0 left-0 z-40'>
 
-      <div class='w-full h-[76px] fixed top-0 left-0 z-40 bg-[url("ContourBackground.svg")] bg-fixed bg-contain bg-no-repeat'></div>
+      <div class='w-full h-[76px] fixed top-0 left-0 z-40 bg-[url("/public/ContourBackground.svg")] bg-fixed bg-contain bg-no-repeat'></div>
     
       <img src="/LineMaskSmall.svg" alt="LineMaskSmall" class="absolute w-full bottom-0 h-3 px-2 xl:px-20"  />
       <!-- <img src="/MaskRectangle.svg" class="absolute w-full bottom-[0.7rem] h-32"  /> -->
