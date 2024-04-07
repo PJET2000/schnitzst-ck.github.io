@@ -1,15 +1,20 @@
 import React, { useEffect} from 'react';
-import { useSpring, motion } from 'framer-motion';
+import { useViewportScroll, useTransform, motion } from 'framer-motion';
 import './AnimatedLogo.css';
 
 interface LineAnimationProps {
   width: number | string;
   height: number | string;
-  color: string;
 }
 
 
-const AnimatedLine: React.FC<LineAnimationProps> = ({ width, height, color }) => {
+const AnimatedLine: React.FC<LineAnimationProps> = ({ width, height }) => {
+  const { scrollY } = useViewportScroll();
+const initialColor = "#b78765"; // Initalfarbe
+const finalColor = "#FFF5ED"; // Endfarbe
+
+const lineColor = useTransform(scrollY, [0, window.innerHeight * 0.46], [initialColor, finalColor]);
+
   useEffect(() => {
     const totalAnimationTime = 3; // Total animation time in seconds
     const masks = ["Line"];
@@ -38,7 +43,7 @@ const AnimatedLine: React.FC<LineAnimationProps> = ({ width, height, color }) =>
         accumulatedDelay += duration; // Increment the delay for the next path
       }
     });
-  }, [width, height, color]);
+  }, [width, height]);
 
 
 
@@ -50,7 +55,7 @@ const AnimatedLine: React.FC<LineAnimationProps> = ({ width, height, color }) =>
     viewBox="0 0 205.87198 3.1314034"
     preserveAspectRatio="none"
     className="fill-current text-base-content w-full z-40 h-full xl:h-full"
-        style={{ color: color }} // Apply width and height here
+        style={{ color: lineColor }} // Apply width and height here
     height="100%"
     width="100%"
   >
