@@ -187,6 +187,12 @@ const handleNachrichtClick = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!email.trim()) {
+      alert('Bitte gib deine E-Mail-Adresse ein, um die Nachricht abzusenden.');
+      return; // Beendet die Funktion frühzeitig, um das Absenden zu verhindern
+    }
+    
     const formData = {
       "form-name": "nachricht",
       möbelstück,
