@@ -24,7 +24,7 @@ const NachrichtForm: React.FC = () => {
   const [selectedStil, setSelectedStil] = useState('');
   const [budget, setBudget] = useState([100, 10000]);
   const [isFlexibleBudget, setIsFlexibleBudget] = useState(false);
-  const [formattedBudget, setFormattedBudget] = useState('Budget: 100€ - 10000€');
+  const [formattedBudget, setFormattedBudget] = useState('Budget: 100€ - 10000€\n');
   const [nachricht, setNachricht] = useState('');
   const [formattedNachricht, setFormattedNachricht] = useState('');
   const [editableMessage, setEditableMessage] = useState('');
