@@ -194,7 +194,7 @@ const handleNachrichtClick = () => {
     }
     
     const formData = {
-      "form-name": "nachricht",
+      "form-name": "gesamtnachricht",
       möbelstück,
       stil,
       nachricht,
