@@ -222,6 +222,7 @@ const handleNachrichtClick = () => {
 
       return (
     <form onSubmit={handleSubmit} className="p-5 xl:p-10 max-w-4xl flex flex-grow flex-col mx-auto my-20 text-center border-2 h-[620px] border-base-content card bg-transparent" name="gesamtnachricht" method="POST" data-netlify="true"  data-aos="flip-left">
+      <input type="hidden" name="editableMessage" value={editableMessage} />
       <div className='mb-5 xl:mb-5' >
       <h1 className="text-3xl font-bold text-left" >Mein SchnitzStück:</h1>
         {(currentStep < 5) ? (
