@@ -187,10 +187,16 @@ const handleNachrichtClick = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!email.trim()) {
+      alert('Bitte gib deine E-Mail-Adresse ein, um die Nachricht abzusenden.');
+      return; // Beendet die Funktion frühzeitig, um das Absenden zu verhindern
+    }
+    
     const formData = {
-      "form-name": "gesamtnachricht",
+      "form-name": "nachricht",
       möbelstück,
-      stil, 
+      stil,
       nachricht,
       editableMessage,
       email,
@@ -200,7 +206,7 @@ const handleNachrichtClick = () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode(formData)
     })
-    .then(() => alert("Dein Nachricht wurde erfolgreich gesendet!"))
+    .then(() => setCurrentStep(6))
     .catch(error => alert("Ups, da ist wohl was schiefgegangen: " + JSON.stringify(error))); // Änderung hier
   };
 
