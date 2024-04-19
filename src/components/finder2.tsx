@@ -233,7 +233,7 @@ const handleNachrichtClick = () => {
       <input type="hidden" name="email" value={email} />
       <input type="hidden" name="möbelstück" value={möbelstück} />
       <input type="hidden" name="stil" value={stil} />
-      <input type="hidden" name="budget" value={budget} />
+      <input type="hidden" name="budget" value={formattedBudget} />
       <div className='mb-5 xl:mb-5' >
       <h1 className="text-3xl font-bold text-left" >Mein SchnitzStück:</h1>
         {(currentStep < 5) ? (
