@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold mt-8 mb-4;
+  }
+  h2 {
+    @apply text-2xl font-semibold mt-6 mb-3;
+  }
+  h3 {
+    @apply text-xl font-semibold mt-5 mb-2;
+  }
+  h4 {
+    @apply text-lg font-medium mt-4 mb-2;
+  }
+  p, li {
+    @apply text-base mt-2 mb-2;
+  }
+  ul {
+    @apply list-disc list-inside;
+  }
+  ol {
+    @apply list-decimal list-inside;
+  }
+  a {
+    @apply underline;
+  }
+  blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic;
+  }
+}

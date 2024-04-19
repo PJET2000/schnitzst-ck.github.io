@@ -850,7 +850,7 @@ const handleNachrichtClick = () => {
       <div className="form-control mb-0">
       <textarea
         ref={textareaRef}
-        className="textarea textarea-bordered w-full max-h-[435px] md:max-h-[330px] xl:max-h-[320px]"
+        className="textarea textarea-bordered w-full max-h-[435px] md:max-h-[330px] xl:max-h-[300px]"
         name="editableMessage"
         value={editableMessage}
         onChange={handleEditableMessageChange}

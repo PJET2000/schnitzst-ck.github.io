@@ -1,0 +1,56 @@
+---
+const { title } = Astro.props;
+const pageTitle = title || "SchnitzStück - Individuelle Holzmöbel aus München";
+const description = "Ihre Vision, unser Handwerk. Bei SchnitzStück in München überschreiten wir die Grenzen traditioneller Schreinerkunst, um durch unvergleichlich freie Formgestaltung Ihre Vorstellungen in exklusive, handgeschnitzte Realität zu verwandeln.";
+const preloadImage = '/Sessel.jpg'; // Pfad zu Ihrem Hauptbild
+import Nav from "../components/Nav"
+import Footer from "../components/footer.astro"
+import Jump from "../components/jumpBase"
+import "../styles/styles.css"
+
+---
+
+
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <link rel="icon" type="image/png" href="./public/SchnitzStück Logo schwarz.png">
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <!-- Preloading des Hauptbildes für verbessertes LCP -->
+    <link rel="preload" as="image" href={preloadImage}>
+    <!-- Weitere Scripts und Stylesheets, falls benötigt -->
+  </head>
+  <body class="bg-[url('/public/ContourBackground2.svg')] bg-fixed bg-cover">
+
+    
+    <Jump client:only="react" />
+  
+    <!-- <Nav client:load/> -->
+    <div class='w-full h-[86px] fixed top-0 left-0 z-40'>
+
+      <div class='w-full h-[76px] fixed top-0 left-0 z-40 bg-[url("/public/ContourBackground2.svg")] bg-fixed bg-cover'></div>
+    
+      <img src="/LineMaskSmall.svg" alt="LineMaskSmall" class="absolute w-full bottom-0 h-3 px-2 xl:px-20"  />
+      <!-- <img src="/MaskRectangle.svg" class="absolute w-full bottom-[0.7rem] h-32"  /> -->
+     
+
+  <!--     <img src="/Line.svg" alt="Line" class="absolute w-full bottom-0 h-3 px-2 xl:px-20 z-50" /> -->
+      
+
+
+    </div>
+
+
+    <div class="body"> 
+      <main>
+        <slot />
+        
+      </main>
+    </divc>
+
+    
+    <Footer />
