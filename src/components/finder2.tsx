@@ -197,7 +197,7 @@ const handleNachrichtClick = () => {
       "form-name": "gesamtnachricht",
       möbelstück,
       stil,
-      budget,
+      formattedBudget,
       nachricht,
       editableMessage,
       email,
