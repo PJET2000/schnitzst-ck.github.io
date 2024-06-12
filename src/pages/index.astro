@@ -9,6 +9,7 @@ import AnimatedLogo from "../components/logo"
 import Finder from "../components/FinderAnimation"
 import MaskTest from "../components/maskTest.astro"
 import LineAnimation from "../components/LineAnimation"
+import Carousel from "../components/Carousel.astro"
 ---
 
 <MainLayout title="SchnitzStück">
@@ -19,6 +20,7 @@ import LineAnimation from "../components/LineAnimation"
 
   
    <Intro class="snap-y snap-mandatory h-screen overflow-y-scroll" />
+   <Carousel client:visible />
 
 
     
