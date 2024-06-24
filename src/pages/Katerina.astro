@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/base-layout.astro"
 ---
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
 
 <BaseLayout title="Katerina">
 
@@ -12,8 +14,20 @@ import BaseLayout from "../layouts/base-layout.astro"
         <br> 
         <br> 
 
-    <html><iframe src="https://tinyglb.com/viewer/179c86dafe0949078670f227b78b462c" class="rounded-xl" style="border: 10px; height: 700px; width: 100%"></iframe></html>
-       
+    <!-- <html><iframe src="https://tinyglb.com/viewer/179c86dafe0949078670f227b78b462c" class="rounded-xl" style="border: 10px; height: 700px; width: 100%"></iframe></html>
+        -->
+    <model-viewer 
+    src="Katerina-3-small2.glb" 
+    class="rounded-xl" 
+    style="border: 10px; height: 700px; width: 100%;" 
+    alt="Beschreibulkmfäa d es Modells" 
+    ar 
+    environment-image="../../public/hayloft_4k.hdr" 
+    
+    shadow-intensity="1" 
+    camera-controls 
+    touch-action="pan-y">
+</model-viewer>
 
 
 </div>
