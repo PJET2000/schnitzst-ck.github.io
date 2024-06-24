@@ -3,13 +3,59 @@ import BaseLayout from "../layouts/base-layout.astro"
 ---
 
 <BaseLayout title="Katerina">
-    <div class="flex justify-center items-center min-h-screen">
-        <model-viewer  class="rounded-xl" style="border: 10px; height: 700px; width: 100%" src="/Katerina-3-small2.glb" ar ar-modes="scene-viewer webxr scene-viewer quick-look" tone-mapping="neutral" poster="/poster.webp" shadow-intensity="1" exposure="1" auto-rotate>
-            <div class="progress-bar hide" slot="progress-bar">
-                <div class="update-bar"></div>
-            </div>
-        </model-viewer>
-    </div>
+    <html>
 
+
+    <div id="card" class="">
+        <div class="model-viewer-container mt-96 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
+        <!-- All you need to put beautiful, interactive 3D content on your site: -->
+        <model-viewer  class="h-full "
+        src="../../public/Katerina-3-small2.glb"
+                                      
+                      poster="/poster.webp"
+                      alt="A 3D model of an astronaut"
+                      shadow-intensity="1"
+                      camera-controls
+                      auto-rotate ar>
+        </model-viewer>
+        
+      
+        <div class="p-4 bg-base-content">
+        <h2 class="text-xl text-base-100 font-bold">Modell 3</h2>
+        <p class="text-lg text-base-100">Dies ist das Modell Katerina. Weitere Informationen können hier hinzugefügt werden.</p>
+      </div>
+    </div>
+    </div>
+      
+
+      </html>
 
 </BaseLayout>
+
+<!-- ios-src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.usdz?v=1569545377878" -->
+
+<style>
+    body {
+    margin: 1em;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #card {
+    margin: 3em auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+
+    overflow: hidden;
+  }
+  
+  model-viewer {
+    width: 100%;
+    height: 700px;
+   
+    
+    
+  }
+
+</style>

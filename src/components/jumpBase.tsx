@@ -75,6 +75,7 @@ const Jump: React.FC = () => {
     zIndex: 50,
     marginTop: 54,
     width: '100%',
+    height: 'auto',
     
   };
 
