@@ -5,36 +5,71 @@ import BaseLayout from "../layouts/base-layout.astro"
 <BaseLayout title="Katerina">
     <html>
 
+    <div id="card" class="">
+      <div class="model-viewer-container mt-72 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
+          <model-viewer  class="h-full "
+          src="/Katharina-1.glb"
+          ios-src="/Katerina-3-small.usdz"
+          
+                                      
+                      ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
+                      alt="Katerina-1"
+                      shadow-intensity="1"
+                      auto-rotate>                  
+          </model-viewer>
+              
+      <div class="p-4 bg-base-content">
+      <h2 class="text-2xl text-base-100 font-bold">Modell 1</h2>
+      <p class="text-lg text-base-100">Einfacher Beistelltisch aus Buchenschichtholz mit grauer Vinyl-Arbeitsplatte und orangefarbener Rückwand.</p>
+    </div>
+  </div>
+  </div>
+
+
+    
+
 
     <div id="card" class="">
-        <div class="model-viewer-container mt-96 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
-        <model-viewer  class="h-full "
-        src="/Katerina-3-small2.glb"
-        ios-src="/Katerina-3-small.usdz"
-        
-                                      
-                    ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
-                      alt="A 3D model of an astronaut"
-                      shadow-intensity="1"
-                      auto-rotate>
-                      
-                    
-                    
-        </model-viewer>
-
-       
-        
-        
-      
+        <div class="model-viewer-container mt-72 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
+            <model-viewer  class="h-full "
+            src="/Katharina-Intarsien.glb"
+            ios-src="/Katerina-3-small.usdz"
+            
+                                        
+                        ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
+                        alt="Katerina-2"
+                        shadow-intensity="1"
+                        auto-rotate>                  
+            </model-viewer>
+                
         <div class="p-4 bg-base-content">
-        <h2 class="text-2xl text-base-100 font-bold">Modell 3</h2>
-        <p class="text-lg text-base-100">Beistelltisch aus Nussbaum und maseriertem Ahorn mit Intarsienarbeit in der Tischplatte</p>
+        <h2 class="text-2xl text-base-100 font-bold">Modell 2</h2>
+        <p class="text-lg text-base-100">Beistelltisch aus Buchenvollholz mit Intarsienarbeit in der Tischplatte und grauer Rückwand </p>
       </div>
-     
     </div>
     </div>
     
       
+
+    <div id="card" class="">
+      <div class="model-viewer-container mt-72 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
+          <model-viewer  class="h-full "
+          src="/Katerina-3-small2.glb"
+          ios-src="/Katerina-3-small.usdz"
+          
+                                      
+                      ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
+                      alt="Katerina-3"
+                      shadow-intensity="1"
+                      auto-rotate>                  
+          </model-viewer>
+              
+      <div class="p-4 bg-base-content">
+      <h2 class="text-2xl text-base-100 font-bold">Modell 3</h2>
+      <p class="text-lg text-base-100">Beistelltisch aus Nussbaum und maseriertem Ahorn mit Intarsienarbeit in der Tischplatte</p>
+    </div>
+  </div>
+  </div>
 
       </html>
 
@@ -54,6 +89,7 @@ import BaseLayout from "../layouts/base-layout.astro"
     display: flex;
     flex-direction: column;
     max-width: 600px;
+    
     overflow: hidden;
     width: 90%
   }
