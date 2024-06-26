@@ -9,12 +9,13 @@ import BaseLayout from "../layouts/base-layout.astro"
       <div class="model-viewer-container mt-72 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
           <model-viewer  class="h-full "
           src="/Katharina-1.glb"
-          ios-src="/Katerina-3-small.usdz"
+          ios-src="/Katerina-1.usdz"
           
                                       
                       ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
-                      alt="Katerina-1"
+                      alt="Katharina-1"
                       shadow-intensity="1"
+                      exposure="0.85"
                       auto-rotate>                  
           </model-viewer>
               
@@ -33,12 +34,13 @@ import BaseLayout from "../layouts/base-layout.astro"
         <div class="model-viewer-container mt-72 shadow-lg overflow-hidden rounded-xl border-4 border-base-content">
             <model-viewer  class="h-full "
             src="/Katharina-Intarsien.glb"
-            ios-src="/Katerina-3-small.usdz"
+            ios-src="/Katharina-Intarsien1.usdz"
             
                                         
                         ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral"
                         alt="Katerina-2"
                         shadow-intensity="1"
+                        exposure="0.85"
                         auto-rotate>                  
             </model-viewer>
                 
@@ -94,7 +96,17 @@ import BaseLayout from "../layouts/base-layout.astro"
   </ul>
 
   <h2>Augmented Reality (AR) nutzen</h2>
-  <p>Du kannst unsere 3D-Modelle auch direkt in deinem eigenen Raum ansehen! Wenn du auf deinem Smartphone das AR-Symbol siehst, folge diesen Schritten:</p>
+  <p>Du kannst unsere 3D-Modelle auch direkt in deinem eigenen Raum ansehen! Wenn du auf deinem Smartphone das AR-Symbol
+    <?xml version="1.0" encoding="UTF-8"?>
+<svg style="height: 20px; display: inline;" class="mb-1" version="1.1" viewBox="0 0 420.16 418.69" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(-83.9 -77.675)">
+<ellipse cx="293.98" cy="287.02" rx="210.08" ry="209.35" fill="#fff" fill-rule="evenodd" stroke-width="1.2023"/>
+</g>
+<g transform="translate(-83.9 -77.675)">
+<path d="m204.02 399.83c-17.229-4.2116-24.121-14.932-24.121-36.756v-13.4l19.526-0.38285v11.486c0 18.378 1.9144 20.292 20.292 20.292h10.72v20.292l-10.72-0.38287c-6.1259 0-13.018-0.38287-15.698-1.1486zm153.15-8.4232v-9.9546l12.252-0.38287c17.612-0.38288 18.761-1.5315 19.526-19.144l0.38293-12.635h19.909l-0.38282 13.4c-1.5315 27.95-10.72 37.521-37.904 38.287l-13.783 0.38287zm-65.854-22.972c-6.1259-1.9144-60.111-33.31-64.705-37.521-4.9773-4.5944-5.3602-7.2746-5.3602-44.03 0-46.327-3.8287-39.436 37.521-63.556 39.053-22.206 34.075-22.589 80.786 6.5088l4.5944 2.2972c19.526 11.869 22.206 10.72 21.824 55.516-0.38287 44.413 0.76573 41.35-13.783 49.773-56.282 32.544-56.282 32.161-60.876 31.012zm-7.2745-51.305v-24.121l-16.463-9.9546-21.441-12.252-4.9773-2.6801v49.773l4.2116 2.2972 5.7431 3.063c6.5088 4.2116 31.012 17.995 31.778 17.995 1.1486 0 1.1486-5.3602 1.1486-24.121zm42.116 12.252 20.292-11.486 0.38286-24.504c0.38287-26.418 0.38287-26.035-5.7431-22.206-1.1486 1.1486-10.338 6.5088-19.909 11.869l-16.846 9.5718v24.504c0 13.4 0.38289 24.121 0.76575 24.121zm-26.035-57.048c17.995-9.9546 35.99-21.441 35.224-21.824-1.1486-1.1486-34.458-20.675-38.67-22.589-3.063-1.5315-3.063-1.5315-22.589 9.5718-24.504 14.166-23.738 13.783-18.378 16.081l19.526 11.486c20.292 11.869 17.995 11.103 24.887 7.2745zm-120.6-63.174c1.1486-27.95 11.486-37.521 41.733-37.521h9.1889v19.909h-11.103c-17.995 0-19.909 2.2972-19.909 19.909v11.103h-20.292zm209.43 2.6801c0-17.995-2.2972-20.292-20.675-20.292h-11.486l0.38287-9.5718 0.38287-9.9546 13.4 0.38287c26.801 0 36.756 9.5718 37.904 37.521l0.38282 12.635h-20.292z" stroke-width=".38287"/>
+</g>
+</svg>
+  siehst, folge diesen Schritten:</p>
   <ol>
     <li>Tippe auf das AR-Symbol.</li>
     <li>Halte dein Smartphone über den Bereich, in dem du das Modell platzieren möchtest.</li>
